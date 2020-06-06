@@ -1,2 +1,2 @@
 # ladiagonaledupoulpe-game-two
-Game two, with Godot
+Developement branch
