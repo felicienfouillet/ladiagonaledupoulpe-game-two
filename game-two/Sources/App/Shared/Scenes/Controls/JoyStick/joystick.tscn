@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/JoystickSplitted.png" type="Texture" id=1]
+[ext_resource path="res://Sources/App/Shared/Scenes/Controls/JoyStick/TouchScreenButton.cs" type="Script" id=2]
+[ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/SmallHandleFilledGrey.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 50.0
+
+[node name="joystick" type="Sprite"]
+position = Vector2( 249, 850 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( -75, -75 )
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 3 )
+shape = SubResource( 1 )
+script = ExtResource( 2 )

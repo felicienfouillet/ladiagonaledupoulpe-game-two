@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/SmallHandleFilledGrey.png" type="Texture" id=1]
+[ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/LargeHandleFilledGrey.png" type="Texture" id=2]
+[ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/icons8-jump-100.png" type="Texture" id=4]
+[ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/btnNorm.png" type="Texture" id=5]
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="btnA" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2( 1550, 855 )
+scale = Vector2( 1.25, 1.25 )
+normal = ExtResource( 5 )
+
+[node name="btnB" type="TouchScreenButton" parent="."]
+position = Vector2( 1700, 850 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 1 )
+action = "ui_hanging"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="btnB"]
+visible = false
+position = Vector2( 70.6677, 66.9482 )
+texture = ExtResource( 4 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 25, 25 )
+scale = Vector2( 2, 2 )
+
+[node name="Hanging" type="Label" parent="Node2D"]
+margin_right = 57.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Hanging:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Label" parent="Node2D"]
+margin_top = 20.9111
+margin_right = 57.0
+margin_bottom = 38.9111
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Heatlh:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
