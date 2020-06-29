@@ -32,9 +32,12 @@ public class Player : KinematicBody2D
         }
     }
 	
-	private const int SPEED = 750;
-	private const int JUMP_SPEED = 7000;
-	private const int GRAVITY = 500;
+	[Export]
+	private int PLAYER_SPEED = 250;
+	[Export]
+	private int JUMP_SPEED = 7000;
+	[Export]
+	private int GRAVITY = 1200;
 	
 	private Vector2 velocity;
 	private bool jumping;
@@ -129,6 +132,8 @@ public class Player : KinematicBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		velocity = new Vector2();
+
 		this.Jumping = false;
 		this.HangingStatus = false;
 		this.HangStat = true;
@@ -151,6 +156,8 @@ public class Player : KinematicBody2D
 		{
 			TentaculeArray[i].AddNewPixBlock(new PixBlock());
 			TentaculeArray[i].AddNewPixBlock(new PixBlock());
+
+			TentaculeArray[i].PixBlockArray[TentaculeArray[i].PixBlockArray.Count-1].Name = "LastPixBlock";
 		}
 
 		this.Position = this.GetViewport().Size/2;
@@ -277,7 +284,7 @@ public class Player : KinematicBody2D
 	
 	public void MoveIt(float delta)
 	{
-		velocity = new Vector2();
+		// velocity = new Vector2();
 
 		velocity.x = 0;
 
@@ -289,28 +296,26 @@ public class Player : KinematicBody2D
 		if (right || direction == "droite")
 		{
 			EmitSignal(nameof(Flip), true);
-			velocity.x += SPEED;
+			velocity.x += PLAYER_SPEED;
 		}
 		if (left || direction == "gauche")
 		{
 			EmitSignal(nameof(Flip), false);
-			velocity.x -= SPEED;
+			velocity.x -= PLAYER_SPEED;
 		}
 
 		// if (jump && IsOnFloor())
 		// {
 		// 	Jump();
 		// }
+		
+		velocity.y += delta * GRAVITY;
+
+		velocity = MoveAndSlide(velocity, new Vector2(0, -1));
 
 		if(hanging){
 			this.HangStat = !this.HangStat;
 		}
-		
-		// if(!this.IsOnFloor()){
-		velocity.y += delta * (GRAVITY*100);
-		// }
-
-		velocity = MoveAndSlide(velocity, new Vector2(0, -1));
 
 		if (velocity.x > 0 || velocity.x < 0)
 		{

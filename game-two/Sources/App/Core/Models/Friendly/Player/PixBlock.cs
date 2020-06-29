@@ -17,16 +17,18 @@ public class PixBlock : KinematicBody2D
 
     public void _on_Pixblock_body_entered(KinematicBody2D body)
     {
-        if(body.Name == "Monstre")
+        if(this.Name == "LastPixBlock")
         {
-            ((Monstre) body).Health -= 25;
-        }
+            if(body.Name == "Monstre")
+            {
+                ((Monstre) body).Health -= 25;
+            }
 
-        if(body.Name == "AllowedHanging")
-        {
-            ((Player) GetParent().GetParent()).AllowedHanging = true;
+            if(body.Name == "AllowedHanging")
+            {
+                ((Player) GetParent().GetParent()).AllowedHanging = true;
+            }
         }
-
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
