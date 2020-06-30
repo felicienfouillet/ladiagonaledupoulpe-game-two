@@ -6,8 +6,10 @@ public class Monstre : KinematicBody2D
 
     private AnimatedSprite _monstre;
 
-    private const int MONSTRE_SPEED = 250;
-    private const int MONSTRE_GRAVITY = 500;
+    [Export]
+	private int MONSTRE_SPEED = 400;
+	[Export]
+	private int MONSTRE_GRAVITY = 1200;
 
     private Vector2 _velocity;
 
@@ -98,10 +100,10 @@ public class Monstre : KinematicBody2D
         {
             this.QueueFree();
         }
-        // if(_monstre.Animation == "MonstreAttack")
-        // {
-        //     this._attackStatus = false;
-        // }
+        if(_monstre.Animation == "MonstreAttack")
+        {
+            this._attackStatus = false;
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

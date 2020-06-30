@@ -96,13 +96,14 @@ public class HangingAnimation : Node
     public void SetHangingAnimationOf()
 	{
 		GD.Print("[JumpAnimation] Set jumping off");
-		var parent = (Player) this.Tentacule.GetParent();
+		Player parent = (Player) this.Tentacule.GetParent();
 
 		if(parent.AllowedHanging)
 		{
 			parent.Position = parent.Position + this.Tentacule.Position + this.FinalPos;
 			parent.AllowedHanging = false;
 		}
+
 		parent.HangingStatus = false;
 
 		if(this.Tentacule.PositionRelativeToPlayer == "Right")

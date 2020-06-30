@@ -33,13 +33,25 @@ public class Player : KinematicBody2D
     }
 	
 	[Export]
-	private int PLAYER_SPEED = 250;
+	private int PLAYER_SPEED = 400;
 	[Export]
 	private int JUMP_SPEED = 7000;
 	[Export]
 	private int GRAVITY = 1200;
 	
 	private Vector2 velocity;
+
+	public Vector2 Velocity
+	{
+		get
+		{
+			return this.velocity;
+		}
+		set
+		{
+			this.velocity = value;
+		}
+	}
 	private bool jumping;
 	public bool Jumping
 	{
@@ -157,6 +169,7 @@ public class Player : KinematicBody2D
 			TentaculeArray[i].AddNewPixBlock(new PixBlock());
 			TentaculeArray[i].AddNewPixBlock(new PixBlock());
 
+			TentaculeArray[i].PixBlockArray[0].Name = "FirstPixBlock";
 			TentaculeArray[i].PixBlockArray[TentaculeArray[i].PixBlockArray.Count-1].Name = "LastPixBlock";
 		}
 
@@ -212,8 +225,7 @@ public class Player : KinematicBody2D
 				}
 				else if(!this.HangingStatus)
 				{
-					this.HangingStatus = true;
-					if(finalPos.x > 1000){						
+					if(finalPos.x > 1000){			
 						if(this.TentaculeArray[i].PositionRelativeToPlayer == "Right")	
 						{
 							Vector2 circleCenter = this.TentaculeArray[i].PixBlockArray[0].Position;
@@ -242,7 +254,6 @@ public class Player : KinematicBody2D
 							}
 						}
 					}
-					this.HangingStatus = false;
 				}
 			}
 		}
@@ -250,6 +261,7 @@ public class Player : KinematicBody2D
 
 	public void Hanging(Vector2 finalPos, Vector2 lastFinalPos, Tentacule tentacule, Vector2 circleCenter, float radius)
 	{
+		this.HangingStatus = true;
 		double exp = Math.Sqrt(Math.Pow(finalPos.x - circleCenter.x,2)+Math.Pow(finalPos.y-circleCenter.y,2));
 		// GD.Print("Expression => " + exp);
 		

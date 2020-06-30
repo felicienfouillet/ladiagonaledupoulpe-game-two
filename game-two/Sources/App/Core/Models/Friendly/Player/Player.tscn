@@ -101,7 +101,7 @@ shape = SubResource( 1 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 16 )
 animation = "idle"
-frame = 1
+frame = 6
 playing = true
 script = ExtResource( 2 )
 
