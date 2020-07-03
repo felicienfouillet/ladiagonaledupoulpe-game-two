@@ -32,6 +32,7 @@ public class PixBlock : Node2D
             if(body.Name.Contains("Monstre") && _player.HangingStatus)
             {
                 ((Monstre) body).Health -= 25;
+                _player.AllowedHanging = true;
             }
 
             if(body.Name == "AllowedHanging")

@@ -80,9 +80,12 @@ public class Monstre : KinematicBody2D
     {
         if(body.Name == "Player")
         {
-            this._attackStatus = true;
-            this.Player = ((Player) body);
-            this.Player.Health -= 25;
+            if(this.Health > 0)
+            {
+                this._attackStatus = true;
+                this.Player = ((Player) body);
+                this.Player.Health -= 25;
+            }
         }
     }
 
