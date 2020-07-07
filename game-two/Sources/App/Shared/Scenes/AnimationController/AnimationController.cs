@@ -1,9 +1,9 @@
 using Godot;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
 
-using Shared.Tools.ExtensionMethods.ToGodot;
+	using Shared.Tools.ExtensionMethods.ToGodot;
 
 public class AnimationController : Node2D
 {

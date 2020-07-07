@@ -39,6 +39,15 @@ public class TouchScreenButton : Godot.TouchScreenButton
         }
     }
 
+    public enum Direction
+    {
+        Droite,
+        Gauche,
+        Haut,
+        Bas,
+        Null
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -79,21 +88,11 @@ public class TouchScreenButton : Godot.TouchScreenButton
         {
             //GD.Print("LACHÉ");
             Position = new Vector2(0, 0) - radius;
-            EmitSignal(nameof(directionJoy), "STOP");
+            EmitSignal(nameof(directionJoy), Direction.Null);
             isPressedArea = false;
             EmitSignal(nameof(JoyState), isPressedArea);
             timerTransparence.Start();
         }
-
-		if(inputEvent is InputEventScreenDrag && isPressedArea)
-		{
-			/*GD.Print("Position relative to the scene = > " + positionRelativeToScene);
-			GD.Print("Player position = > " + this.PlayerPosition);
-			GD.Print("Clicked area = > " + inputEvent.Get("position"));
-			GD.Print("Parent position = > " + positionParent);
-			GD.Print("  ");
-			GD.Print("  ");*/
-		}
 
         if (((inputEvent is InputEventScreenTouch && inputEvent.IsPressed()) || inputEvent is InputEventScreenDrag) && (((inputEventPosition.x < positionParent.x + (zone * tolerenceJoy)) && (inputEventPosition.x > positionParent.x + (zone * tolerenceJoy) * (-1))) && (inputEventPosition.y < positionParent.y + (zone * tolerenceJoy) && inputEventPosition.y > positionParent.y + (zone * tolerenceJoy) * (-1))))
         {
@@ -111,27 +110,26 @@ public class TouchScreenButton : Godot.TouchScreenButton
             float directionH = getJoyPos().x;
             float directionV = getJoyPos().y;
             //GD.Print("getJoyPos",getJoyPos());
-
-
-            // if (directionV > zone/2 )
-			// {
-			// 	// GD.Print("Direction : BAS");
-			// 	EmitSignal(nameof(directionJoy), "bas");
-			// }
+            
 			if (directionV < zone/2*-1 )
 			{
 				// GD.Print("Direction : HAUT");
-				EmitSignal(nameof(directionJoy), "haut");
+				EmitSignal(nameof(directionJoy), Direction.Haut);
+			}
+            if (directionV > zone/2 )
+			{
+			 	// GD.Print("Direction : BAS");
+				EmitSignal(nameof(directionJoy), Direction.Bas);
 			}
             if (directionH > zone / 2)
             {
                 // GD.Print("Direction : DROITE");
-                EmitSignal(nameof(directionJoy), "droite");
+                EmitSignal(nameof(directionJoy), Direction.Droite);
             }
             if (directionH < zone / 2 * (-1))
             {
                 // GD.Print("Direction : GAUCHE");
-                EmitSignal(nameof(directionJoy), "gauche");
+                EmitSignal(nameof(directionJoy), Direction.Gauche);
             }
 
 

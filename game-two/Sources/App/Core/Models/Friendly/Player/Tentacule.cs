@@ -6,18 +6,18 @@ using System.Collections.Generic;
 /// </summary>
 public class Tentacule : KinematicBody2D
 {
-	private string _positionRelativeToPlayer;
+	private bool _isPositionRight;
 
-	public string PositionRelativeToPlayer
+	public bool IsPositionRight
 	{
 		get
 		{
-			return this._positionRelativeToPlayer;
+			return this._isPositionRight;
 		}
 
 		set
 		{
-			this._positionRelativeToPlayer = value;
+			this._isPositionRight = value;
 		}
 	}
 
@@ -55,9 +55,9 @@ public class Tentacule : KinematicBody2D
 	
 	private SpriteFrames _aPix;
 	
-	public Tentacule(string positionRelativeToPlayer)
+	public Tentacule(bool positionRelativeToPlayer)
 	{
-		this.PositionRelativeToPlayer = positionRelativeToPlayer;
+		this.IsPositionRight = positionRelativeToPlayer;
 		this.PixBlockArray = new List<PixBlock>();
 	}
 
@@ -88,11 +88,9 @@ public class Tentacule : KinematicBody2D
 		//ShowPixBlocks();
 	}
 	
-	public void AddNewPixBlock(PixBlock pixBlock)
+	public void AddNewPixBlock()
 	{
-		//_aPix = ResourceLoader.Load("res://Sources/App/Core/Models/Friendly/Player/PixBlock.tres") as SpriteFrames;
-
-		pixBlock = ((PixBlock) _pixBlockScene.Instance());
+		PixBlock pixBlock = ((PixBlock) _pixBlockScene.Instance());
 		Vector2 pos = this.Position;
 		
 		//aPlayer.Frames = _aPix;
@@ -119,11 +117,11 @@ public class Tentacule : KinematicBody2D
 			posY = (rng.RandfRange(-5, 5));
 		}
 		
-		if(this.PositionRelativeToPlayer == "Right")
+		if(this.IsPositionRight)
 		{
 			pixBlock.Position = new Vector2(50*this.PixBlockArray.IndexOf(pixBlock), posY);
 		}
-		else if(this.PositionRelativeToPlayer == "Left")
+		else if(!this.IsPositionRight)
 		{
 			pixBlock.Position = new Vector2(-(50*this.PixBlockArray.IndexOf(pixBlock)), posY);
 		}
@@ -131,5 +129,15 @@ public class Tentacule : KinematicBody2D
 		{
 			GD.Print("Error => Argument 5 invalid => Right or Left");
 		}
+
+		for(int i = 0; i <= this.PixBlockArray.Count-1; i++)
+		{
+			if(this.PixBlockArray[i].Name == "LastPixBlock")
+			{
+				this.PixBlockArray[i].Name = "null";
+			}
+		}
+		this.PixBlockArray[0].Name = "FirstPixBlock";
+		this.PixBlockArray[this.PixBlockArray.Count-1].Name = "LastPixBlock";
 	}
 }

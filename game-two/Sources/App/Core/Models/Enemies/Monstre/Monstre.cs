@@ -5,11 +5,8 @@ public class Monstre : KinematicBody2D
 {
 
     private AnimatedSprite _monstre;
-
-    [Export]
-	private int MONSTRE_SPEED = 400;
-	[Export]
-	private int MONSTRE_GRAVITY = 1200;
+	private const int MONSTRE_SPEED = 400;
+    private const int MONSTRE_GRAVITY = 1200;
 
     private Vector2 _velocity;
 
@@ -99,11 +96,11 @@ public class Monstre : KinematicBody2D
 
     public void _on_AnimatedSprite_animation_finished()
     {
-        if(_monstre.Animation == "MonstreDeath")
+        if(_monstre.Animation == Animations.EnnemiesAnimation.Death.Value)
         {
             this.QueueFree();
         }
-        if(_monstre.Animation == "MonstreAttack")
+        if(_monstre.Animation == Animations.EnnemiesAnimation.Attack.Value)
         {
             this._attackStatus = false;
         }

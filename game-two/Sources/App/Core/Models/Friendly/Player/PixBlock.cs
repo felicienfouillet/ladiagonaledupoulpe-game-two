@@ -3,10 +3,9 @@ using System;
 
 public class PixBlock : Node2D
 {
-    private AnimatedSprite animSprite;
+    private AnimatedSprite _animSprite;
 
-	[Export]
-	private Vector2 PIXBLOCK_GRAVITY = new Vector2(0, 200);
+	private Vector2 _PixBlockGravity = new Vector2(0, 200);
 
     private Vector2 _velocity;
 
@@ -16,7 +15,7 @@ public class PixBlock : Node2D
 
     public override void _Ready()
     {
-        animSprite = ((AnimatedSprite) GetNode("AnimatedSprite"));
+        _animSprite = ((AnimatedSprite) GetNode("AnimatedSprite"));
 
         _parent = ((Tentacule) this.GetParent());
 
@@ -32,10 +31,10 @@ public class PixBlock : Node2D
             if(body.Name.Contains("Monstre") && _player.HangingStatus)
             {
                 ((Monstre) body).Health -= 25;
-                _player.AllowedHanging = true;
+                //_player.AllowedHanging = true;
             }
 
-            if(body.Name == "AllowedHanging")
+            if(body.Name == "AllowedHanging" && _player.HangingStatus)
             {
                 _player.AllowedHanging = true;
             }
@@ -45,26 +44,6 @@ public class PixBlock : Node2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
-        
-        // if(this.Name != "FirstPixBlock")
-        // {
-        //     //_velocity = (_velocity + PIXBLOCK_GRAVITY) * delta;
-
-        //     //_velocity = _player.Velocity;
-        //     for(int i = 1; i <= _parent.PixBlockArray.Count - 1; i++)
-        //     {
-        //         if(_parent.PixBlockArray[i].Position <= (_parent.PixBlockArray[i-1].Position + new Vector2(0, -150)))
-        //         {
-        //             //MoveAndCollide(_velocity);
-        //             // _velocity = MoveAndSlide(_velocity, new Vector2(0, -1));
-        //         }
-        //     }
-        // }else{
-        //      _velocity = _player.Velocity;
-        // }
-
-        // _velocity = MoveAndSlide(_velocity, new Vector2(0, -1));
-
-        animSprite.Play("pixBlockAnim");        
+        _animSprite.Play("pixBlockAnim");        
     }
 }

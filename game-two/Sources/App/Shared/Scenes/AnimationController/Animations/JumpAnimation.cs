@@ -7,7 +7,6 @@ using Shared.Tools.ExtensionMethods.ChangePosition;
 public class JumpAnimation : Node
 {
 	private Tentacule _tentacule;
-	private String _tentaculePosition;
 	
 	public Tentacule Tentacule
 	{
@@ -22,25 +21,11 @@ public class JumpAnimation : Node
 		}
 	}
 	
-	public String TentaculePosition
-	{
-		get
-		{
-			return this._tentaculePosition;
-		}
-		
-		set
-		{
-			this._tentaculePosition = value;
-		}
-	}
-	
 	private AnimationController _parent;
 
 	public void GetTantacule(Tentacule tentacule)
 	{
 		this.Tentacule = tentacule;
-		this.TentaculePosition = tentacule.PositionRelativeToPlayer;
 	}
 	
 	public JumpAnimation()
@@ -57,11 +42,11 @@ public class JumpAnimation : Node
 		{
 			PixBlock pixBlock = pixBlockArray[i];
 
-			if(this.TentaculePosition == "Left")
+			if(!this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(-25*i, 50*i);
 			}
-			else if(this.TentaculePosition == "Right")
+			else if(this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(25*i, 50*i);
 			}
@@ -83,11 +68,11 @@ public class JumpAnimation : Node
 			var rng = new RandomNumberGenerator();
 			rng.Randomize();
 
-			if(this.TentaculePosition == "Left")
+			if(this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(rng.RandfRange(-5, 5), 50*i);
 			}
-			else if(this.TentaculePosition == "Right")
+			else if(!this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(-rng.RandfRange(-5, 5), 50*i);
 			}
@@ -107,11 +92,11 @@ public class JumpAnimation : Node
 			
 			var rng = new RandomNumberGenerator();
 			rng.Randomize();
-			if(this.Tentacule.PositionRelativeToPlayer == "Right")
+			if(this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(rng.RandfRange(-5, 5), 150 + 50*i);
 			}
-			else if(this.Tentacule.PositionRelativeToPlayer == "Left")
+			else if(!this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(-rng.RandfRange(-5, 5), 150 + 50*i);
 			}
@@ -130,11 +115,11 @@ public class JumpAnimation : Node
 			
 			var rng = new RandomNumberGenerator();
 			rng.Randomize();
-			if(this.Tentacule.PositionRelativeToPlayer == "Right")
+			if(this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(-rng.RandfRange(-5, 5), 50*i);
 			}
-			else if(this.Tentacule.PositionRelativeToPlayer == "Left")
+			else if(!this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(rng.RandfRange(-5, 5), 50*i);
 			}
@@ -153,11 +138,11 @@ public class JumpAnimation : Node
 			
 			var rng = new RandomNumberGenerator();
 			rng.Randomize();
-			if(this.TentaculePosition == "Left")
+			if(!this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(-50*i, 50*i);
 			}
-			else if(this.TentaculePosition == "Right")
+			else if(this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(50*i, 50*i);
 			}
@@ -177,11 +162,11 @@ public class JumpAnimation : Node
 			var rng = new RandomNumberGenerator();
 			rng.Randomize();
 
-			if(this.TentaculePosition == "Right")
+			if(this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(50*i, rng.RandfRange(-5, 5));
 			}
-			else if(this.TentaculePosition == "Left")
+			else if(!this.Tentacule.IsPositionRight)
 			{
 				pixBlock.Position = new Vector2(-50*i, rng.RandfRange(-5, 5));
 			}

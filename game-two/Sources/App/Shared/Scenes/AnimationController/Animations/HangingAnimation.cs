@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class HangingAnimation : Node
 {
     private Tentacule _tentacule;
-	private String _tentaculePosition;
 	private Vector2 _finalPos;
 	
 	public Tentacule Tentacule
@@ -20,19 +19,7 @@ public class HangingAnimation : Node
 			this._tentacule = value;
 		}
 	}
-	
-	public String TentaculePosition
-	{
-		get
-		{
-			return this._tentaculePosition;
-		}
-		
-		set
-		{
-			this._tentaculePosition = value;
-		}
-	}
+
 	public Vector2 FinalPos
 	{
 		get
@@ -51,7 +38,6 @@ public class HangingAnimation : Node
 	public void GetTantacule(Tentacule tentacule, Vector2 finalPos)
 	{
 		this.Tentacule = tentacule;
-		this.TentaculePosition = tentacule.PositionRelativeToPlayer;
 		this.FinalPos = finalPos;
 	}
 	
@@ -96,6 +82,7 @@ public class HangingAnimation : Node
     public void SetHangingAnimationOf()
 	{
 		GD.Print("[JumpAnimation] Set jumping off");
+
 		Player parent = (Player) this.Tentacule.GetParent();
 
 		if(parent.AllowedHanging)
@@ -104,9 +91,7 @@ public class HangingAnimation : Node
 			parent.AllowedHanging = false;
 		}
 
-		parent.HangingStatus = false;
-
-		if(this.Tentacule.PositionRelativeToPlayer == "Right")
+		if(this.Tentacule.IsPositionRight)
 		{
 			Vector2 pos = this.Tentacule.Position;
 			
@@ -119,7 +104,7 @@ public class HangingAnimation : Node
 				pixBlock.Position = new Vector2((50*i), rng.RandfRange(-5, 5));
 			}
 		}
-		else if(this.Tentacule.PositionRelativeToPlayer == "Left")
+		else if(!this.Tentacule.IsPositionRight)
 		{
 			Vector2 pos = this.Tentacule.Position;
 			
@@ -132,5 +117,7 @@ public class HangingAnimation : Node
 				pixBlock.Position =new Vector2(-50*i, rng.RandfRange(-5, 5));
 			}
 		}
+
+		parent.HangingStatus = false;
 	}
 }
