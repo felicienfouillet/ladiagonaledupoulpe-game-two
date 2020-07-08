@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Sources/App/Shared/Scenes/Controls/Controls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/Tree/tree-1.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/Tree/tree-4.png" type="Texture" id=15]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/Tree/tree-2.png" type="Texture" id=16]
 [ext_resource path="res://Sources/App/Core/Models/Enemies/Monstre/Monstre.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/Tree/tree-6.png" type="Texture" id=18]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/parallax-space-backgrounds/PNG/game_background_1/layers/planet3.png" type="Texture" id=21]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/parallax-space-backgrounds/PNG/game_background_1/layers/comet.png" type="Texture" id=22]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/2d-planet-game-backgrounds/_PNG/2/3_v2.png" type="Texture" id=23]
@@ -163,9 +164,10 @@ scale = Vector2( 4, 0.5 )
 texture = ExtResource( 27 )
 
 [node name="purple_font" type="Sprite" parent="Backgrounds/caves"]
-position = Vector2( 2880, 1080 )
+position = Vector2( 153.57, 255.894 )
 scale = Vector2( 4, 1 )
 texture = ExtResource( 29 )
+offset = Vector2( 680.766, 824.106 )
 
 [node name="tree-2" type="Sprite" parent="Backgrounds"]
 position = Vector2( 3484.56, 248.329 )
@@ -255,6 +257,16 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 flip_h = true
 
+[node name="tree-6" type="Sprite" parent="Backgrounds"]
+position = Vector2( -85, 1605 )
+rotation = 0.0872665
+texture = ExtResource( 18 )
+
+[node name="tree-7" type="Sprite" parent="Backgrounds"]
+position = Vector2( 5858.88, 1596.81 )
+rotation = 0.0872664
+texture = ExtResource( 18 )
+
 [node name="AllowedHanging" type="TileMap" parent="."]
 visible = false
 position = Vector2( 0, 249 )
@@ -289,7 +301,7 @@ position = Vector2( 2923.75, 546.664 )
 position = Vector2( 5085.79, 559.363 )
 
 [node name="Monstre4" parent="." instance=ExtResource( 17 )]
-position = Vector2( 4450.83, 2175.34 )
+position = Vector2( 4780.46, 2141.7 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 180, 70 )

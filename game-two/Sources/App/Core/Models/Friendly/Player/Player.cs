@@ -191,6 +191,15 @@ public class Player : KinematicBody2D
 		GD.Print(direction);
 		this.direction = direction;
 	}
+
+	public void _on_Player_body_entered(KinematicBody2D body)
+	{
+		if(body.Name.Contains("Monstre") && ((Monstre) body).IsAttack)
+		{
+			this.Health -= 25;
+		}
+	}
+
 	public void GetJoystickStatus(bool state)
 	{
 		GD.Print(state);

@@ -26,15 +26,16 @@ public class PixBlock : Node2D
 
     public void _on_Pixblock_body_entered(KinematicBody2D body)
     {
-        if(this.Name == "LastPixBlock")
+        if(this.Name == "LastPixBlock"  && _player.HangingStatus)
         {
-            if(body.Name.Contains("Monstre") && _player.HangingStatus)
+            if(body.Name.Contains("Monstre"))
             {
+
                 ((Monstre) body).Health -= 25;
                 //_player.AllowedHanging = true;
             }
 
-            if(body.Name == "AllowedHanging" && _player.HangingStatus)
+            if(body.Name == "AllowedHanging")
             {
                 _player.AllowedHanging = true;
             }
