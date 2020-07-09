@@ -48,7 +48,7 @@ public class HangingAnimation : Node
 
 	 public void StartHangingAnimation()
     {
-        GD.Print("[JumpAnimation] Start animation...");
+        GD.Print("[HangUpAnimation] Start animation...");
 		Vector2 pos = this.Tentacule.Position;
 		List<PixBlock> pixBlockArray = this.Tentacule.PixBlockArray;
 
@@ -81,7 +81,7 @@ public class HangingAnimation : Node
 
     public void SetHangingAnimationOf()
 	{
-		GD.Print("[JumpAnimation] Set jumping off");
+		GD.Print("[HangUpAnimation] Set hanging off");
 
 		Player parent = (Player) this.Tentacule.GetParent();
 

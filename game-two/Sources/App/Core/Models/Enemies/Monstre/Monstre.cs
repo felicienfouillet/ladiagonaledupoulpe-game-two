@@ -8,6 +8,9 @@ public class Monstre : KinematicBody2D
 	private const int MONSTRE_SPEED = 400;
     private const int MONSTRE_GRAVITY = 1200;
 
+    private const string LAST_PIX_BLOCK = "LastPixBlock";
+    private const string PLAYER = "Player";
+
     private Vector2 _velocity;
 
     private bool _direction;
@@ -69,7 +72,6 @@ public class Monstre : KinematicBody2D
 
     private Tween _tween;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _tween = new Tween();
@@ -88,17 +90,15 @@ public class Monstre : KinematicBody2D
 
     public void _on_Monstre_body_entered(KinematicBody2D body)
     {
-        GD.Print("Monstre body entered => " + body.Name);
-        if(body.Name == "Player")
+        // GD.Print("Monstre body entered => " + body.Name);
+        if(body.Name == PLAYER)
         {
             if(this.Health > 0)
             {
                 this.IsAttack = true;
-                //this.Player = ((Player) body);
-                //this.Player.Health -= 25;
             }
         }
-        if(body.Name == "LastPixBlock")
+        if(body.Name == LAST_PIX_BLOCK)
         {
             this.Health -= 25;
         }
@@ -106,7 +106,7 @@ public class Monstre : KinematicBody2D
 
     public void _on_Monstre_body_exited(KinematicBody2D body)
     {
-        if(body.Name == "Player")
+        if(body.Name == PLAYER)
         {
             this.IsAttack = false;
         }
@@ -114,11 +114,11 @@ public class Monstre : KinematicBody2D
 
     public void _on_AnimatedSprite_animation_finished()
     {
-        if(_monstre.Animation == Animations.EnnemiesAnimation.Death.Value)
+        if(_monstre.Animation == Animations.EnnemiesAnimations.MonstreDeath.ToString())
         {
             this.QueueFree();
         }
-        if(_monstre.Animation == Animations.EnnemiesAnimation.Attack.Value)
+        if(_monstre.Animation == Animations.EnnemiesAnimations.MonstreAttack.ToString())
         {
             this.IsAttack = false;
         }
@@ -158,24 +158,24 @@ public class Monstre : KinematicBody2D
             }
 
             _tween.Stop(this);
-            _monstre.Play("MonstreDeath");
+            _monstre.Play(Animations.EnnemiesAnimations.MonstreDeath.ToString());
         }
         else
         {
             if((_velocity.x > 0 || _velocity.x < 0) && !this.IsAttack)
             {
                 _monstre.Offset = new Vector2(0, 0);
-                _monstre.Play("MonstreRun");
+                _monstre.Play(Animations.EnnemiesAnimations.MonstreRun.ToString());
             }
             else if(this.IsAttack)
             {
                 _monstre.Offset = new Vector2(0, 25);
-                _monstre.Play("MonstreAttack");
+                _monstre.Play(Animations.EnnemiesAnimations.MonstreAttack.ToString());
             }
             else
             {
                 _monstre.Offset = new Vector2(0, 50);
-                _monstre.Play("MonstreIdle");
+                _monstre.Play(Animations.EnnemiesAnimations.MonstreIdle.ToString());
             }
 
             _velocity = MoveAndSlide(_velocity, new Vector2(0, -1));

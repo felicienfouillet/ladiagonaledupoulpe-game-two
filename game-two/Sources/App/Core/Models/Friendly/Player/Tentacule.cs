@@ -69,36 +69,15 @@ public class Tentacule : KinematicBody2D
 		this.PlayerScale = player.Scale.x;
 	}
 
-	public override void _Draw()
-	{
-		// if(this.PositionRelativeToPlayer == "Right")
-		// {
-		// 	DrawCircle(new Vector2(this.PixBlockArray[0].Position.x, this.PixBlockArray[0].Position.y), (this.PixBlockArray[PixBlockArray.Count-1].Position.x - this.PixBlockArray[0].Position.x)+100, new Color(1, 0, 0, 1));
-		// }
-		// else
-		// {
-		// 	DrawCircle(new Vector2(this.PixBlockArray[0].Position.x, this.PixBlockArray[0].Position.y), (this.PixBlockArray[0].Position.x - this.PixBlockArray[PixBlockArray.Count-1].Position.x)+100, new Color(1, 0, 0, 1));
-		// }
-		
-	} 
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(float delta)
-	{
-		//ShowPixBlocks();
-	}
-	
 	public void AddNewPixBlock()
 	{
 		PixBlock pixBlock = ((PixBlock) _pixBlockScene.Instance());
 		Vector2 pos = this.Position;
 		
-		//aPlayer.Frames = _aPix;
 		float scaleX = 0.05f;
 		float scaleY = 0.05f;
 		pixBlock.Scale = new Vector2(scaleX, scaleY);
 		
-		//pixBlock.AddChild((AnimatedSprite) aPlayer);
 		this.AddChild(pixBlock);
 		this.PixBlockArray.Add(pixBlock);
 		

@@ -38,6 +38,7 @@ public class Player : KinematicBody2D
 
 	private const int POULPE_POS = 960;
 	
+	/// <summary> Velocity of player, used for player movements
 	private Vector2 _velocity;
 
 	public Vector2 Velocity
@@ -169,8 +170,6 @@ public class Player : KinematicBody2D
 			TentaculeArray[i].AddNewPixBlock();
 			TentaculeArray[i].AddNewPixBlock();
 		}
-
-		this.Position = this.GetViewport().Size/2;
 	}
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -268,6 +267,7 @@ public class Player : KinematicBody2D
 	public void HangUp(Vector2 finalPos, Vector2 lastFinalPos, Tentacule tentacule, Vector2 circleCenter, float radius)
 	{
 		this.HangingStatus = true;
+		// Calculation of the distance between the tentacle origin and the clicked point
 		double exp = Math.Sqrt(Math.Pow(finalPos.x - circleCenter.x,2)+Math.Pow(finalPos.y-circleCenter.y,2));
 		// GD.Print("Expression => " + exp);
 		
@@ -275,6 +275,7 @@ public class Player : KinematicBody2D
 		{
 			if(exp >= radius*3)
 			{
+				//If exp > 3*TentaculeLenght then we force final point to to the max distance (max distance = radius)
 				double rX = radius*3;
 				double d1 = finalPos.x - circleCenter.x;
 				double d2 = finalPos.y - circleCenter.y;
@@ -289,28 +290,27 @@ public class Player : KinematicBody2D
 					dy = -Math.Sqrt(Math.Pow(rX,2) - Math.Pow(dx,2));
 				}
 
-				// GD.Print("dx => " + (circleCenter.x + dx));
-				// GD.Print("dy => " + (circleCenter.y - dy));
-
 				finalPos.x = circleCenter.x + (float) dx;
 				finalPos.y = circleCenter.y - (float) dy;
 			}
-			// GD.Print("Final position 1 = > " + finalPos);
-			animationController.Play("HangingAnimation", tentacule, finalPos);
+			//Starting Hanging Animation
+			animationController.Play(Animations.PlayerAnimations.HangingAnimation.ToString(), tentacule, finalPos);
 		}
 	}
 	
+
+	/// <summary> Method used for player physic's movements operations
 	public void MoveIt(float delta)
 	{
-		// velocity = new Vector2();
-
 		_velocity.x = 0;
 
-		bool right = Input.IsActionPressed("ui_right");
-		bool left = Input.IsActionPressed("ui_left");
-		bool jump = Input.IsActionPressed("ui_space");
-		bool hanging = Input.IsActionPressed("ui_hanging");
+		// Input directions
+		bool right = Input.IsActionPressed(Controls.UI.ui_right.ToString());
+		bool left = Input.IsActionPressed(Controls.UI.ui_left.ToString());
+		bool jump = Input.IsActionPressed(Controls.UI.ui_space.ToString());
+		bool hanging = Input.IsActionPressed(Controls.UI.ui_hanging.ToString());
 		
+		// Modification of player movement depending on the input
 		if (right || direction == TouchScreenButton.Direction.Droite)
 		{
 			EmitSignal(nameof(Flip), true);
@@ -321,20 +321,19 @@ public class Player : KinematicBody2D
 			EmitSignal(nameof(Flip), false);
 			_velocity.x -= PLAYER_SPEED;
 		}
-
-		// if (jump && IsOnFloor())
-		// {
-		// 	Jump();
-		// }
 		
+		// Addition of gravity
 		_velocity.y += delta * GRAVITY;
 
+		// Move the player
 		_velocity = MoveAndSlide(_velocity, new Vector2(0, -1));
 
+		// Button for activation/desactivation of hanging
 		if(hanging){
 			this.HangStat = !this.HangStat;
 		}
 
+		// Moddification of animations
 		if (_velocity.x > 0 || _velocity.x < 0)
 		{
 			EmitSignal(nameof(Anim), "run");
@@ -362,7 +361,7 @@ public class Player : KinematicBody2D
 			{
 				animationController = new AnimationController();
 				AddChild(animationController);
-				animationController.Play("JumpAnimation", this.TentaculeArray[i]);
+				animationController.Play(Animations.PlayerAnimations.JumpAnimation.ToString(), this.TentaculeArray[i]);
 			}
 				var factor = this.TentaculeArray[0].PixBlockArray.Count;
 				_velocity.y -= JUMP_SPEED * factor;
@@ -414,7 +413,8 @@ public class Player : KinematicBody2D
 		}
 	}
 	
-	public void AddNewTentacule(bool tentaculePosition){
+	public void AddNewTentacule(bool tentaculePosition)
+	{
 		var tentacule = new Tentacule(tentaculePosition);
 
 		this.AddChild(tentacule);
@@ -422,12 +422,17 @@ public class Player : KinematicBody2D
 
 		Vector2 pos = this.Position;
 		
-		if(tentaculePosition){
+		if(tentaculePosition)
+		{
 			tentacule.Position = new Vector2(100, 50);
 			// tentacule.Position = new Vector2(pos.x-800, pos.y-725);
-		}else if(!tentaculePosition){
+		}
+		else if(!tentaculePosition)
+		{
 			tentacule.Position = new Vector2(-100, 50);
-		}else{
+		}
+		else
+		{
 			GD.Print("Error => Argument 1 invalid => Please use Right or Left");
 		}
 		
