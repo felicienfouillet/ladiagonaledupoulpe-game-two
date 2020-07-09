@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Sources/App/Shared/Scenes/Controls/Controls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/Tree/tree-1.png" type="Texture" id=2]
@@ -76,9 +76,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 261.594, 531.355 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 4750, 150 )
@@ -263,15 +260,6 @@ position = Vector2( 2923.75, 546.664 )
 
 [node name="Monstre3" parent="." instance=ExtResource( 17 )]
 position = Vector2( 5085.79, 559.363 )
-
-[node name="BlackFontsArea" type="RigidBody2D" parent="."]
-position = Vector2( 3787.4, 309.45 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackFontsArea"]
-shape = SubResource( 5 )
 
 [node name="Void" type="RigidBody2D" parent="."]
 position = Vector2( 2800, 925 )

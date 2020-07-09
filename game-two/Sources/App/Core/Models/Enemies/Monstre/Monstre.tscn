@@ -573,7 +573,7 @@ animations = [ {
 extents = Vector2( 106.617, 59.2446 )
 
 [sub_resource type="RectangleShape2D" id=111]
-extents = Vector2( 99.9642, 63.065 )
+extents = Vector2( 115.33, 65.8207 )
 
 [node name="Monstre" type="KinematicBody2D"]
 position = Vector2( -15.8666, 0 )
@@ -593,7 +593,7 @@ shape = SubResource( 110 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -13.4631, 43.8207 )
+position = Vector2( 0.5369, 43.8207 )
 shape = SubResource( 111 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Monstre_body_entered"]

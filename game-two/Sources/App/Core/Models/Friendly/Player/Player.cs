@@ -139,19 +139,6 @@ public class Player : KinematicBody2D
 		}
 	}
 
-	private bool _border;
-	public bool Border
-	{
-		get
-		{
-			return this._border;
-		}
-		set
-		{
-			this._border = value;
-		}
-	}
-
 	private bool _isHit;
 	public bool IsHit
 	{
@@ -183,7 +170,6 @@ public class Player : KinematicBody2D
 		this.HangingStatus = false;
 		this.HangStat = true;
 		this.AllowedHanging = false;
-		this.Border = false;
 		this.IsHit = false;
 
 		this.Health = 50;
@@ -236,23 +222,11 @@ public class Player : KinematicBody2D
 		{
 			this.Health -= this.Health;
 		}
-		if(body.Name == BLACK_FONTS)
-		{
-			this.Border = true;
-		}
-	}
-	
-	public void _on_Player_body_exited(KinematicBody2D body)
-	{
-		if(body.Name == BLACK_FONTS)
-		{
-			// this.Border = false;
-		}
 	}
 
 	public void _on_Head_animation_finished()
 	{
-		if(((Head) this.GetNode(HEAD)).Animation == Animations.HeadAnimations.HitAnimation.ToString())
+		if(((Head) this.GetNode(HEAD)).Animation.Contains(Animations.HeadAnimations.HitAnimation.ToString()))
 		{
 			this.IsHit = false;
 		}

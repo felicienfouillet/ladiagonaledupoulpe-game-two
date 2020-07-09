@@ -29,17 +29,7 @@ public class Head : AnimatedSprite
 			FlipH = true;
 		}
 
-		if(((Player) this.GetParent()).Border)
-		{
-			Play("White" + _animation);
-		}
-		else
-		{
-			Play(_animation);
-		}
-		
-	
-		
+		Play("White" + _animation);
 	}
 	
 	public void Flip(bool flip_dir)
