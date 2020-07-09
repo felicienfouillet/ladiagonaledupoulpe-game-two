@@ -3,18 +3,25 @@ using System;
 
 public class PixblockSprite : AnimatedSprite
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+    private Player _player;
+    private const string _playerNodePath = "../../../../Player";
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        _player = (Player) this.GetNode(_playerNodePath);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        Play("pixBlockAnim");     
+        if(_player.Border)
+		{
+            this.Play(Animations.PixBlockAnimations.WhitePixBlockAnimation.ToString());
+		}
+		else
+		{
+            this.Play(Animations.PixBlockAnimations.PixBlockAnimation.ToString());
+		}   
     }
 }

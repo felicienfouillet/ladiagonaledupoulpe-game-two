@@ -10,10 +10,6 @@ public class PixBlock : Node2D
 
     private AnimatedSprite _animSprite;
 
-	private Vector2 _PixBlockGravity = new Vector2(0, 200);
-
-    private Vector2 _velocity;
-
     private Tentacule _parent;
 
     private Player _player;
@@ -25,8 +21,6 @@ public class PixBlock : Node2D
         _parent = ((Tentacule) this.GetParent());
 
         _player = ((Player) _parent.GetParent());
-        
-        _velocity = new Vector2();
     }
 
     public void _on_Pixblock_body_entered(KinematicBody2D body)
@@ -43,10 +37,5 @@ public class PixBlock : Node2D
                 _player.AllowedHanging = true;
             }
         }
-    }
-
-    public override void _PhysicsProcess(float delta)
-    {
-        _animSprite.Play(Animations.PixBlockAnimations.pixBlockAnim.ToString());        
     }
 }

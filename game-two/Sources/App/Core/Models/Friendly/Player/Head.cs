@@ -29,18 +29,17 @@ public class Head : AnimatedSprite
 			FlipH = true;
 		}
 
-		// float scaleX = 10f;
-		// float scaleY = 10f;
-		// this.SetScale(new Vector2(scaleX, scaleY));		
+		if(((Player) this.GetParent()).Border)
+		{
+			Play("White" + _animation);
+		}
+		else
+		{
+			Play(_animation);
+		}
 		
-		/*if(_animation == "run"){
-			this.SetScale(new Vector2(scaleX, scaleY));
-		}else{
-			this.SetScale(new Vector2(scaleX, scaleY));
-		}*/
+	
 		
-		
-		Play(_animation);
 	}
 	
 	public void Flip(bool flip_dir)

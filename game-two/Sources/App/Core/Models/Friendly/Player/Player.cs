@@ -37,6 +37,12 @@ public class Player : KinematicBody2D
 	private const int GRAVITY = 1200;
 
 	private const int POULPE_POS = 960;
+
+	private const string MONSTRE = "Monstre";
+	private const string VOID = "Void";
+	private const string BLACK_FONTS = "BlackFontsArea";
+
+	private const string HEAD = "Head";
 	
 	/// <summary> Velocity of player, used for player movements
 	private Vector2 _velocity;
@@ -133,6 +139,32 @@ public class Player : KinematicBody2D
 		}
 	}
 
+	private bool _border;
+	public bool Border
+	{
+		get
+		{
+			return this._border;
+		}
+		set
+		{
+			this._border = value;
+		}
+	}
+
+	private bool _isHit;
+	public bool IsHit
+	{
+		get
+		{
+			return this._isHit;
+		}
+		set
+		{
+			this._isHit = value;
+		}
+	}
+
 	private Label _hangingLabel;
 	private Label _healthLabel;
 	
@@ -151,6 +183,8 @@ public class Player : KinematicBody2D
 		this.HangingStatus = false;
 		this.HangStat = true;
 		this.AllowedHanging = false;
+		this.Border = false;
+		this.IsHit = false;
 
 		this.Health = 50;
 
@@ -193,9 +227,34 @@ public class Player : KinematicBody2D
 
 	public void _on_Player_body_entered(KinematicBody2D body)
 	{
-		if(body.Name.Contains("Monstre") && ((Monstre) body).IsAttack)
+		if(body.Name.Contains(MONSTRE) && ((Monstre) body).IsAttack)
 		{
+			this.IsHit = true;
 			this.Health -= 25;
+		}
+		if(body.Name == VOID)
+		{
+			this.Health -= this.Health;
+		}
+		if(body.Name == BLACK_FONTS)
+		{
+			this.Border = true;
+		}
+	}
+	
+	public void _on_Player_body_exited(KinematicBody2D body)
+	{
+		if(body.Name == BLACK_FONTS)
+		{
+			// this.Border = false;
+		}
+	}
+
+	public void _on_Head_animation_finished()
+	{
+		if(((Head) this.GetNode(HEAD)).Animation == Animations.HeadAnimations.HitAnimation.ToString())
+		{
+			this.IsHit = false;
 		}
 	}
 
@@ -334,15 +393,23 @@ public class Player : KinematicBody2D
 		}
 
 		// Moddification of animations
-		if (_velocity.x > 0 || _velocity.x < 0)
+		if(this.IsHit)
 		{
-			EmitSignal(nameof(Anim), "run");
-			SetTentaculePosWhenFlip("run");
+			EmitSignal(nameof(Anim), Animations.HeadAnimations.HitAnimation.ToString());
+			SetTentaculePosWhenFlip("idle");
 		}
 		else
 		{
-			EmitSignal(nameof(Anim), "idle");
-			SetTentaculePosWhenFlip("idle");
+			if (_velocity.x > 0 || _velocity.x < 0)
+			{
+				EmitSignal(nameof(Anim), Animations.HeadAnimations.RunAnimation.ToString());
+				SetTentaculePosWhenFlip("run");
+			}
+			else
+			{
+				EmitSignal(nameof(Anim), Animations.HeadAnimations.IdleAnimation.ToString());
+				SetTentaculePosWhenFlip("idle");
+			}
 		}
 		
 		if (this.Jumping && IsOnFloor())

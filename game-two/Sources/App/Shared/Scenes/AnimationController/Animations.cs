@@ -4,9 +4,25 @@ namespace Animations
 	{
 		JumpAnimation,
 		HangingAnimation,
+		DeathAnimation
+	}
+	
+
+	enum PixBlockAnimations
+	{
+		PixBlockAnimation,
+		WhitePixBlockAnimation
+
+	}
+
+	enum HeadAnimations
+	{
+		RunAnimation,
+		IdleAnimation,
 		HitAnimation,
 		DeathAnimation
 	}
+
 	enum EnnemiesAnimations
 	{
 		MonstreRun,
@@ -14,10 +30,5 @@ namespace Animations
 		MonstreAttack,
 		HitAnimation,
 		MonstreDeath
-	}
-
-	enum PixBlockAnimations
-	{
-		pixBlockAnim
 	}
 }
