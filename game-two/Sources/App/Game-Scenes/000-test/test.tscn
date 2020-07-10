@@ -246,19 +246,15 @@ tile_data = PoolIntArray( -2228228, 0, 0, -2162692, 0, 0, -2097156, 0, 0, -20316
 [node name="GUI" parent="." instance=ExtResource( 7 )]
 
 [node name="Monstre" parent="." instance=ExtResource( 17 )]
-visible = false
 position = Vector2( 1825.98, 545.217 )
 
 [node name="Monstre2" parent="." instance=ExtResource( 17 )]
-visible = false
 position = Vector2( 2923.75, 546.664 )
 
 [node name="Monstre3" parent="." instance=ExtResource( 17 )]
-visible = false
 position = Vector2( 5085.79, 559.363 )
 
 [node name="Void" type="RigidBody2D" parent="."]
-visible = false
 position = Vector2( 2800, 925 )
 __meta__ = {
 "_edit_group_": true
@@ -268,5 +264,4 @@ __meta__ = {
 shape = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-visible = false
 position = Vector2( 180, 70 )
