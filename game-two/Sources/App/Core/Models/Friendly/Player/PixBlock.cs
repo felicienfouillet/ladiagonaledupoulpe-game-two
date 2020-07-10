@@ -30,6 +30,7 @@ public class PixBlock : Node2D
             if(body.Name.Contains(MONSTRE))
             {
                 ((Monstre) body).Health -= 25;
+                ((Monstre) body).IsHit = true;
             }
 
             if(body.Name == ALLOWED_HANGING)

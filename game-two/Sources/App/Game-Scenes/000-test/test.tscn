@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Sources/App/Shared/Scenes/Controls/Controls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/Tree/tree-1.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Sources/App/Shared/Assets/Others/tileset.png" type="Texture" id=6]
 [ext_resource path="res://Sources/App/Shared/Scenes/Controls/Buttons/GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/parallax-space-backgrounds/PNG/game_background_2/layers/sun.png" type="Texture" id=8]
-[ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/blue_font.png" type="Texture" id=9]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/parallax-space-backgrounds/PNG/game_background_1/layers/planet2.png" type="Texture" id=10]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/parallax-space-backgrounds/PNG/game_background_1/layers/space.png" type="Texture" id=11]
 [ext_resource path="res://Sources/App/Shared/Assets/Backgrounds/parallax-space-backgrounds/PNG/game_background_2/layers/planet.png" type="Texture" id=12]
@@ -134,12 +133,6 @@ position = Vector2( -563.066, -30.1945 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 21 )
 
-[node name="blue_font" type="Sprite" parent="Backgrounds"]
-visible = false
-position = Vector2( 2880, 1075 )
-scale = Vector2( 4, 1 )
-texture = ExtResource( 9 )
-
 [node name="grad_font" type="Sprite" parent="Backgrounds"]
 position = Vector2( 2880, 1076.97 )
 scale = Vector2( 4, 1 )
@@ -253,15 +246,19 @@ tile_data = PoolIntArray( -2228228, 0, 0, -2162692, 0, 0, -2097156, 0, 0, -20316
 [node name="GUI" parent="." instance=ExtResource( 7 )]
 
 [node name="Monstre" parent="." instance=ExtResource( 17 )]
+visible = false
 position = Vector2( 1825.98, 545.217 )
 
 [node name="Monstre2" parent="." instance=ExtResource( 17 )]
+visible = false
 position = Vector2( 2923.75, 546.664 )
 
 [node name="Monstre3" parent="." instance=ExtResource( 17 )]
+visible = false
 position = Vector2( 5085.79, 559.363 )
 
 [node name="Void" type="RigidBody2D" parent="."]
+visible = false
 position = Vector2( 2800, 925 )
 __meta__ = {
 "_edit_group_": true
@@ -271,4 +268,5 @@ __meta__ = {
 shape = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
+visible = false
 position = Vector2( 180, 70 )

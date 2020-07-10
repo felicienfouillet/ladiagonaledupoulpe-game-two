@@ -70,6 +70,19 @@ public class Monstre : KinematicBody2D
         }
     }
 
+    private bool _isHit;
+	public bool IsHit
+	{
+		get
+		{
+			return this._isHit;
+		}
+		set
+		{
+			this._isHit = value;
+		}
+	}
+
     private Tween _tween;
 
     public override void _Ready()
@@ -80,10 +93,11 @@ public class Monstre : KinematicBody2D
         _tween.InterpolateCallback(this, 2f, nameof(ChangeDirection));
         _tween.Start();
 
+        this.IsHit = false;
         this.Direction = false;
         
         _monstre = ((AnimatedSprite) this.GetChild(0));
-        this.Health = 25;
+        this.Health = 50;
         this.IsAttack = false;
         _isOnGround = false;
     }
@@ -100,6 +114,7 @@ public class Monstre : KinematicBody2D
         }
         if(body.Name == LAST_PIX_BLOCK)
         {
+            this.IsHit = true;
             this.Health -= 25;
         }
     }
@@ -121,6 +136,10 @@ public class Monstre : KinematicBody2D
         if(_monstre.Animation == Animations.EnnemiesAnimations.MonstreAttack.ToString())
         {
             this.IsAttack = false;
+        }
+        if(_monstre.Animation == Animations.EnnemiesAnimations.MonstreHurt.ToString())
+        {
+            this.IsHit = false;
         }
     }
 
@@ -162,7 +181,13 @@ public class Monstre : KinematicBody2D
         }
         else
         {
-            if((_velocity.x > 0 || _velocity.x < 0) && !this.IsAttack)
+            if(this.IsHit)
+            {
+                this._velocity.x = 0;
+                _monstre.Offset = new Vector2(0, 25);
+                _monstre.Play(Animations.EnnemiesAnimations.MonstreHurt.ToString());
+            }
+            else if((_velocity.x > 0 || _velocity.x < 0) && !this.IsAttack)
             {
                 _monstre.Offset = new Vector2(0, 0);
                 _monstre.Play(Animations.EnnemiesAnimations.MonstreRun.ToString());

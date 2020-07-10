@@ -5,6 +5,7 @@
 [node name="Controls" type="CanvasLayer"]
 
 [node name="joystick" parent="." instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 250, 875 )
 
 [node name="Timer" type="Timer" parent="."]

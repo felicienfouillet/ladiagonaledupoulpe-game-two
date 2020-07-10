@@ -29,6 +29,7 @@ namespace Animations
 		MonstreIdle,
 		MonstreAttack,
 		HitAnimation,
-		MonstreDeath
+		MonstreDeath,
+		MonstreHurt
 	}
 }
