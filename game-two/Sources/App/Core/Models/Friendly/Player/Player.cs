@@ -40,8 +40,10 @@ public class Player : KinematicBody2D
 
 	private const string MONSTRE = "Monstre";
 	private const string VOID = "Void";
-	private const string BLACK_FONTS = "BlackFontsArea";
+	private const string END = "End";
 
+	private const string PORTAL = "Portal";
+	private const string PORTAL_NODE_PATH = "../End/";
 	private const string HEAD = "Head";
 	
 	/// <summary> Velocity of player, used for player movements
@@ -197,8 +199,10 @@ public class Player : KinematicBody2D
 	{
 		if(this.Health <= 0)
 		{
-			this.QueueFree();
-			GetTree().ReloadCurrentScene();
+			for(int i = 0; i <= this.TentaculeArray.Count - 1; i++)
+			{
+				this.TentaculeArray[i].Visible = false;
+			}
 		}
 		_hangingLabel.Text = "Hanging: " + this.HangStat;
 		_healthLabel.Text = "Health: " + this.Health;
@@ -222,6 +226,11 @@ public class Player : KinematicBody2D
 		{
 			this.Health -= this.Health;
 		}
+		if(body.Name == END)
+		{
+			this.Visible = false;
+			((EndPortal) this.GetNode(PORTAL_NODE_PATH + PORTAL)).WinStatus = true;
+		}
 	}
 
 	public void _on_Head_animation_finished()
@@ -229,6 +238,18 @@ public class Player : KinematicBody2D
 		if(((Head) this.GetNode(HEAD)).Animation.Contains(Animations.HeadAnimations.HitAnimation.ToString()))
 		{
 			this.IsHit = false;
+		}
+		if(((Head) this.GetNode(HEAD)).Animation.Contains(Animations.HeadAnimations.DeathAnimation.ToString()))
+		{
+			GetTree().ReloadCurrentScene();
+		}
+	}
+
+	public void _on_Portal_animation_finished()
+	{
+		if(((EndPortal) this.GetNode(PORTAL_NODE_PATH + PORTAL)).Animation.Contains(Animations.PortalAnimations.PortalEndAnimation.ToString()))
+		{
+			GetTree().ReloadCurrentScene();
 		}
 	}
 

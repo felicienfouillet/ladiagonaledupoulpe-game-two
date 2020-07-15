@@ -3,8 +3,7 @@ namespace Animations
 	enum PlayerAnimations
 	{
 		JumpAnimation,
-		HangingAnimation,
-		DeathAnimation
+		HangingAnimation
 	}
 	
 
@@ -31,5 +30,11 @@ namespace Animations
 		HitAnimation,
 		MonstreDeath,
 		MonstreHurt
+	}
+
+	enum PortalAnimations
+	{
+		PortalIdleAnimation,
+		PortalEndAnimation
 	}
 }

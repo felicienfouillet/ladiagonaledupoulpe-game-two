@@ -29,7 +29,14 @@ public class Head : AnimatedSprite
 			FlipH = true;
 		}
 
-		Play("White" + _animation);
+		if(((Player) this.GetParent()).Health > 0)
+		{
+			Play("White" + _animation);
+		}
+		else
+		{
+			Play(Animations.HeadAnimations.DeathAnimation.ToString());
+		}
 	}
 	
 	public void Flip(bool flip_dir)

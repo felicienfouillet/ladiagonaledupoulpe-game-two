@@ -104,7 +104,6 @@ public class Monstre : KinematicBody2D
 
     public void _on_Monstre_body_entered(KinematicBody2D body)
     {
-        // GD.Print("Monstre body entered => " + body.Name);
         if(body.Name == PLAYER)
         {
             if(this.Health > 0)
@@ -114,8 +113,9 @@ public class Monstre : KinematicBody2D
         }
         if(body.Name == LAST_PIX_BLOCK)
         {
-            this.IsHit = true;
-            this.Health -= 25;
+            GD.Print("Monstre body entered => " + body.Name);
+            /*this.IsHit = true;
+            this.Health -= 25;*/
         }
     }
 
@@ -164,9 +164,6 @@ public class Monstre : KinematicBody2D
                 _velocity.x += MONSTRE_SPEED;
             }
         }
-
-
-        
         
         if(this.Health <= 0)
         {
