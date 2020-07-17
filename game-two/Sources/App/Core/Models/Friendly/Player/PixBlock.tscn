@@ -1,67 +1,46 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Sources/App/Shared/Assets/Characters/Player/pixblock.png" type="Texture" id=1]
 [ext_resource path="res://Sources/App/Core/Models/Friendly/Player/PixBlock.cs" type="Script" id=2]
 [ext_resource path="res://Sources/App/Core/Models/Friendly/Player/PixblockSprite.cs" type="Script" id=3]
 [ext_resource path="res://Sources/App/Shared/Assets/Characters/Player/pixblock_white.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 460.875, 388.834 )
-
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 1024, 1024 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 4 )
-region = Rect2( 1024, 0, 1024, 1024 )
+region = Rect2( 0, 0, 1024, 1024 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 4 )
-region = Rect2( 0, 1024, 1024, 1024 )
+region = Rect2( 1024, 0, 1024, 1024 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 1024, 1024 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 1024, 0, 1024, 1024 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 1024, 1024, 1024 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
-"loop": true,
-"name": "WhitePixBlockAnimation",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "PixBlockAnimation",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 479.849, 407.807 )
 
 [node name="PixBlock" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 9 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+frames = SubResource( 5 )
 animation = "PixBlockAnimation"
 frame = 1
 playing = true
@@ -70,5 +49,5 @@ script = ExtResource( 3 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Pixblock_body_entered"]
