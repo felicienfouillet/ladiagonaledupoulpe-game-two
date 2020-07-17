@@ -1,17 +1,14 @@
 namespace Animations
 {
+	// Player animations
 	enum PlayerAnimations
 	{
-		JumpAnimation,
 		HangingAnimation
-	}
-	
+	}	
 
 	enum PixBlockAnimations
 	{
-		PixBlockAnimation,
-		WhitePixBlockAnimation
-
+		PixBlockAnimation
 	}
 
 	enum HeadAnimations
@@ -22,6 +19,8 @@ namespace Animations
 		DeathAnimation
 	}
 
+
+	// Ennemies animations
 	enum EnnemiesAnimations
 	{
 		MonstreRun,
@@ -32,6 +31,9 @@ namespace Animations
 		MonstreHurt
 	}
 
+
+
+	// Other animations
 	enum PortalAnimations
 	{
 		PortalIdleAnimation,
