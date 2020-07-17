@@ -10,7 +10,6 @@ public class AnimationController : Node2D
 	private Tentacule _tentacule;
 
 	private AnimationPlayer _animationPlayer;
-	private JumpAnimation _jumpAnimation;
 	private HangingAnimation _hangingAnimation;
 
 	[Signal]
@@ -28,7 +27,6 @@ public class AnimationController : Node2D
 	{
 		InstanciateAnimations();
 
-		this.Connect("JumpAnimationSignal", _jumpAnimation, "GetTantacule");
 		this.Connect("HangingAnimationSignal", _hangingAnimation, "GetTantacule");
 	}
 
@@ -38,8 +36,6 @@ public class AnimationController : Node2D
 	}
 
 	public void InstanciateAnimations(){
-		_jumpAnimation = new JumpAnimation();
-		this.AddChild(_jumpAnimation);
 
 		_hangingAnimation = new HangingAnimation();
 		this.AddChild(_hangingAnimation);
@@ -75,20 +71,6 @@ public class AnimationController : Node2D
 			GD.Print("[AnimationController] Loading animation...");
 			switch(animation)
 			{
-				case "JumpAnimation":
-					AddNewAnimationByMethods(_jumpAnimation, "JumpAnimation", 0, 0.5f, false);
-					
-					SetAnimationTracks("JumpAnimation", 0, 0f, "StartJumpAnimation");
-					SetAnimationTracks("JumpAnimation", 0, 0.1f, "SetMiddleJumpAnimation");
-					SetAnimationTracks("JumpAnimation", 0, 0.2f, "SetLastJumpPosition");
-					SetAnimationTracks("JumpAnimation", 0, 0.3f, "SetFirstReturnJumpAnimation");
-					SetAnimationTracks("JumpAnimation", 0, 0.4f, "SetSecondReturnJumpAnimation");
-					SetAnimationTracks("JumpAnimation", 0, 0.5f, "SetJumpingOf");
-
-					EmitSignal(nameof(JumpAnimationSignal), tentacule);
-					_animationPlayer.Play("JumpAnimation");
-
-					break;
 				case "HangingAnimation":
 					AddNewAnimationByMethods(_hangingAnimation, "HangingAnimation", 0, 0.3f, false);
 					

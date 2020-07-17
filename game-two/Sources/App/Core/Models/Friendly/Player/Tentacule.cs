@@ -6,6 +6,12 @@ using System.Collections.Generic;
 /// </summary>
 public class Tentacule : KinematicBody2D
 {
+	// Const
+	private const string FIRST_PIX_BLOCK = "FirstPixBlock";
+	private const string LAST_PIX_BLOCK = "LastPixBlock";
+	private const string PIX_BLOCK = "PixBlock";
+
+
 	private bool _isPositionRight;
 
 	public bool IsPositionRight
@@ -20,8 +26,6 @@ public class Tentacule : KinematicBody2D
 			this._isPositionRight = value;
 		}
 	}
-
-	private KinematicBody2D _pixBlock;
 	
 	private PackedScene _pixBlockScene;
 
@@ -53,15 +57,13 @@ public class Tentacule : KinematicBody2D
 		}
 	}
 	
-	private SpriteFrames _aPix;
-	
 	public Tentacule(bool positionRelativeToPlayer)
 	{
 		this.IsPositionRight = positionRelativeToPlayer;
 		this.PixBlockArray = new List<PixBlock>();
 	}
 
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		_pixBlockScene = ((PackedScene) ResourceLoader.Load("res://Sources/App/Core/Models/Friendly/Player/PixBlock.tscn"));
@@ -95,7 +97,7 @@ public class Tentacule : KinematicBody2D
 		{
 			posY = (rng.RandfRange(-5, 5));
 		}
-		
+
 		if(this.IsPositionRight)
 		{
 			pixBlock.Position = new Vector2(50*this.PixBlockArray.IndexOf(pixBlock), posY);
@@ -111,12 +113,12 @@ public class Tentacule : KinematicBody2D
 
 		for(int i = 0; i <= this.PixBlockArray.Count-1; i++)
 		{
-			if(this.PixBlockArray[i].Name == "LastPixBlock")
+			if(this.PixBlockArray[i].Name == LAST_PIX_BLOCK)
 			{
-				this.PixBlockArray[i].Name = "null";
+				this.PixBlockArray[i].Name = PIX_BLOCK;
 			}
 		}
-		this.PixBlockArray[0].Name = "FirstPixBlock";
-		this.PixBlockArray[this.PixBlockArray.Count-1].Name = "LastPixBlock";
+		this.PixBlockArray[0].Name = FIRST_PIX_BLOCK;
+		this.PixBlockArray[this.PixBlockArray.Count-1].Name = LAST_PIX_BLOCK;
 	}
 }

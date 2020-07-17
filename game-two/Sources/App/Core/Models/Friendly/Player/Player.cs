@@ -3,19 +3,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Controls;
+
 public class Player : KinematicBody2D
 {
-	private List<Tentacule> _tentaculeArray;
+	// Const
+	private const int POULPE_POS = 960;
+
+	private const string MONSTRE = "Monstre";
+	private const string VOID = "Void";
+	private const string END = "End";
+
+	private const string PORTAL = "Portal";
+	private const string PORTAL_NODE_PATH = "../End/";
+	private const string HEAD = "Head";
+
 	
-	public List<Tentacule> TentaculeArray
+	// Player properties
+	private const int PLAYER_SPEED = 400;
+	private const int JUMP_SPEED = 7000;
+	private const int GRAVITY = 1200;
+
+	/// <summary> Velocity of player, used for player movements
+	private Vector2 _velocity;
+
+	public Vector2 Velocity
 	{
 		get
 		{
-			return this._tentaculeArray;
+			return this._velocity;
 		}
 		set
 		{
-			this._tentaculeArray = value;
+			this._velocity = value;
 		}
 	}
 
@@ -31,47 +51,23 @@ public class Player : KinematicBody2D
             this._health = value;
         }
     }
+
+	private List<Tentacule> _tentaculeArray;
 	
-	private const int PLAYER_SPEED = 400;
-	private const int JUMP_SPEED = 7000;
-	private const int GRAVITY = 1200;
-
-	private const int POULPE_POS = 960;
-
-	private const string MONSTRE = "Monstre";
-	private const string VOID = "Void";
-	private const string END = "End";
-
-	private const string PORTAL = "Portal";
-	private const string PORTAL_NODE_PATH = "../End/";
-	private const string HEAD = "Head";
-	
-	/// <summary> Velocity of player, used for player movements
-	private Vector2 _velocity;
-
-	public Vector2 Velocity
+	public List<Tentacule> TentaculeArray
 	{
 		get
 		{
-			return this._velocity;
+			return this._tentaculeArray;
 		}
 		set
 		{
-			this._velocity = value;
+			this._tentaculeArray = value;
 		}
 	}
-	private bool jumping;
-	public bool Jumping
-	{
-		get
-		{
-			return jumping;
-		}
-		set
-		{
-			this.jumping = value;
-		}
-	}
+
+
+	// Player status	
 	private TouchScreenButton.Direction direction;
 
 	private AnimationController animationController;
@@ -128,19 +124,6 @@ public class Player : KinematicBody2D
 		}
 	}
 
-	private Vector2 _initialPosition;
-	public Vector2 InitialPosition
-	{
-		get
-		{
-			return _initialPosition;
-		}
-		set
-		{
-			this._initialPosition = value;
-		}
-	}
-
 	private bool _isHit;
 	public bool IsHit
 	{
@@ -153,40 +136,46 @@ public class Player : KinematicBody2D
 			this._isHit = value;
 		}
 	}
-
-	private Label _hangingLabel;
-	private Label _healthLabel;
 	
+
+	// Signals
 	[Signal]
 	delegate void Flip(bool flip_dir);
 	[Signal]
 	delegate void Anim(string anim);
-	
-	// Called when the node enters the scene tree for the first time.
+
+
+	// UI ellements
+	private Label _hangingLabel;
+	private Label _healthLabel;
+
+
 	public override void _Ready()
 	{
-		_velocity = new Vector2();
-		this.direction = TouchScreenButton.Direction.Null;
+		// Signals connections
+		this.Connect("Flip", GetNode("Head"), "Flip");
+		this.Connect("Anim", GetNode("Head"), "Anim");
 
-		this.Jumping = false;
+		// Set status to default value
+		this.Velocity = new Vector2();
+		this.direction = TouchScreenButton.Direction.Null;
 		this.HangingStatus = false;
 		this.HangStat = true;
 		this.AllowedHanging = false;
 		this.IsHit = false;
-
 		this.Health = 50;
 
+		// Get UI ellements
 		_hangingLabel = ((Label) this.GetParent().GetNode("GUI").GetNode("Node2D").GetNode("Hanging"));
 		_healthLabel = ((Label) this.GetParent().GetNode("GUI").GetNode("Node2D").GetNode("Health"));
 
+
+		// Add new tentacule
 		this.TentaculeArray = new List<Tentacule>();
 		
 		AddNewTentacule(true);
 		AddNewTentacule(false);
-		
-		this.Connect("Flip", GetNode("Head"), "Flip");
-		this.Connect("Anim", GetNode("Head"), "Anim");
-		
+
 		for (int i = 0; i <= this.TentaculeArray.Count - 1; i++)
 		{
 			TentaculeArray[i].AddNewPixBlock();
@@ -194,24 +183,9 @@ public class Player : KinematicBody2D
 		}
 	}
 
-	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _PhysicsProcess(float delta)
-	{
-		if(this.Health <= 0)
-		{
-			for(int i = 0; i <= this.TentaculeArray.Count - 1; i++)
-			{
-				this.TentaculeArray[i].Visible = false;
-			}
-		}
-		_hangingLabel.Text = "Hanging: " + this.HangStat;
-		_healthLabel.Text = "Health: " + this.Health;
-		MoveIt(delta);
-	}
-	
+	// Signals methods 
 	public void _OnTouchScreenButtonDirectionJoy(TouchScreenButton.Direction direction)
 	{
-		GD.Print(direction);
 		this.direction = direction;
 	}
 
@@ -255,8 +229,27 @@ public class Player : KinematicBody2D
 
 	public void GetJoystickStatus(bool state)
 	{
-		GD.Print(state);
-		this._joystickStatus = state;
+		this.JoystickStatus = state;
+	}
+
+
+	// Godot Process methods
+	public override void _Process(float delta){
+		_hangingLabel.Text = "Hanging: " + this.HangStat;
+		_healthLabel.Text = "Health: " + this.Health;
+
+		// Button for activation/desactivation of hanging
+		bool hanging = Input.IsActionPressed(UI.ui_hanging.ToString());
+
+		if(hanging){
+			this.HangStat = !this.HangStat;
+		}
+
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{
+		MoveIt(delta);
 	}
 
 	public override void _Input(InputEvent @event){
@@ -278,13 +271,9 @@ public class Player : KinematicBody2D
 				Vector2 PixblockPos = this.TentaculeArray[i].PixBlockArray[this.TentaculeArray[i].PixBlockArray.Count-1].Position;
 				Vector2 globalTentPos = ((view_size/2) + this.TentaculeArray[i].Position) - offSet;
 
-				if((finalPos.x >= 150 && finalPos.x <= 350) && (finalPos.y >= 775 && finalPos.y <= 975) || (finalPos.x >= 1600 && finalPos.x <= 1800) && (finalPos.y >= 750 && finalPos.y <= 950))
+				if(!((finalPos.x >= 150 && finalPos.x <= 350) && (finalPos.y >= 775 && finalPos.y <= 975) || (finalPos.x >= 1600 && finalPos.x <= 1800) && (finalPos.y >= 750 && finalPos.y <= 950)) && !this.HangingStatus)
 				{
-					GD.Print("Joystick clicked");
-				}
-				else if(!this.HangingStatus)
-				{
-					if(finalPos.x > POULPE_POS+40){			
+					if(finalPos.x > POULPE_POS + 40){			
 						if(this.TentaculeArray[i].IsPositionRight)	
 						{
 							Vector2 circleCenter = this.TentaculeArray[i].PixBlockArray[0].Position;
@@ -298,7 +287,7 @@ public class Player : KinematicBody2D
 							finalPos = lastFinalPos;
 						}
 					}
-					else if(finalPos.x < POULPE_POS-40)
+					else if(finalPos.x < POULPE_POS - 40)
 					{
 						if(!this.TentaculeArray[i].IsPositionRight)
 						{
@@ -317,7 +306,149 @@ public class Player : KinematicBody2D
 			}
 		}
 	}
+	
+	public void AddNewTentacule(bool tentaculePosition)
+	{
+		var tentacule = new Tentacule(tentaculePosition);
 
+		this.AddChild(tentacule);
+		this.TentaculeArray.Add(tentacule);
+
+		Vector2 pos = this.Position;
+		
+		if(tentaculePosition)
+		{
+			tentacule.Position = new Vector2(100, 50);
+		}
+		else if(!tentaculePosition)
+		{
+			tentacule.Position = new Vector2(-100, 50);
+		}
+		else
+		{
+			GD.Print("Error => Argument 1 invalid => Please use Right or Left");
+		}
+		
+		tentacule.AddNewPixBlock();
+	}
+	
+
+	/// <summary> Method used for player physic's movements operations
+	public void MoveIt(float delta)
+	{
+		_velocity.x = 0;
+
+		// Input directions
+		bool right = Input.IsActionPressed(Controls.UI.ui_right.ToString());
+		bool left = Input.IsActionPressed(Controls.UI.ui_left.ToString());
+		bool jump = Input.IsActionPressed(Controls.UI.ui_space.ToString());
+		
+		// Modification of player movement depending on the input
+		if (right || direction == TouchScreenButton.Direction.Droite)
+		{
+			EmitSignal(nameof(Flip), true);
+			_velocity.x += PLAYER_SPEED;
+		}
+		if (left || direction == TouchScreenButton.Direction.Gauche)
+		{
+			EmitSignal(nameof(Flip), false);
+			_velocity.x -= PLAYER_SPEED;
+		}
+		
+		// Addition of gravity
+		_velocity.y += delta * GRAVITY;
+
+		// Move the player
+		_velocity = MoveAndSlide(_velocity, new Vector2(0, -1));
+
+		ChangeAnimation();
+	}
+
+
+	public void ChangeAnimation()
+	{
+		// Moddification of animations
+		if(this.Health <= 0)
+		{
+			for(int i = 0; i <= this.TentaculeArray.Count - 1; i++)
+			{
+				this.TentaculeArray[i].Visible = false;
+			}
+
+			EmitSignal(nameof(Anim), Animations.HeadAnimations.DeathAnimation.ToString());
+		}
+		else
+		{
+			if(this.IsHit)
+			{
+				EmitSignal(nameof(Anim), Animations.HeadAnimations.HitAnimation.ToString());
+				SetTentaculePosWhenFlip("idle");
+			}
+			else
+			{
+				if (_velocity.x > 0 || _velocity.x < 0)
+				{
+					EmitSignal(nameof(Anim), Animations.HeadAnimations.RunAnimation.ToString());
+					SetTentaculePosWhenFlip("run");
+				}
+				else
+				{
+					EmitSignal(nameof(Anim), Animations.HeadAnimations.IdleAnimation.ToString());
+					SetTentaculePosWhenFlip("idle");
+				}
+			}
+		}
+	}
+
+	public void SetTentaculePosWhenFlip(string anim){
+		for(int i = 0; i <= this.TentaculeArray.Count - 1; i++)
+		{
+			var tentacule = this.TentaculeArray[i];
+			Vector2 tentPos = tentacule.Position;
+			Vector2 pos = this.Position;
+			Vector2 offSet = new Vector2(0, 0);
+
+			if(anim == "run")
+			{
+				if(direction == TouchScreenButton.Direction.Gauche)
+				{
+					if(tentacule.IsPositionRight)
+					{
+						offSet = new Vector2(50, 50);
+					}
+					else if(!tentacule.IsPositionRight)
+					{
+						offSet = new Vector2(-100, 50);
+					}
+				}
+				else if(direction == TouchScreenButton.Direction.Droite)
+				{
+					if(tentacule.IsPositionRight)
+					{
+						offSet = new Vector2(100, 50);
+					}
+					else if(!tentacule.IsPositionRight)
+					{
+						offSet = new Vector2(-50, 50);
+					}
+				}
+			}
+			else if(anim == "idle")
+			{
+				if(tentacule.IsPositionRight)
+				{
+					offSet = new Vector2(100, 50);
+				}
+				else if(!tentacule.IsPositionRight)
+				{
+					offSet = new Vector2(-100, 50);
+				}
+			}
+
+			tentacule.Position = new Vector2(offSet);
+		}
+	}
+	
 	public void HangUp(Vector2 finalPos, Vector2 lastFinalPos, Tentacule tentacule, Vector2 circleCenter, float radius)
 	{
 		this.HangingStatus = true;
@@ -347,157 +478,9 @@ public class Player : KinematicBody2D
 				finalPos.x = circleCenter.x + (float) dx;
 				finalPos.y = circleCenter.y - (float) dy;
 			}
+
 			//Starting Hanging Animation
 			animationController.Play(Animations.PlayerAnimations.HangingAnimation.ToString(), tentacule, finalPos);
 		}
-	}
-	
-
-	/// <summary> Method used for player physic's movements operations
-	public void MoveIt(float delta)
-	{
-		_velocity.x = 0;
-
-		// Input directions
-		bool right = Input.IsActionPressed(Controls.UI.ui_right.ToString());
-		bool left = Input.IsActionPressed(Controls.UI.ui_left.ToString());
-		bool jump = Input.IsActionPressed(Controls.UI.ui_space.ToString());
-		bool hanging = Input.IsActionPressed(Controls.UI.ui_hanging.ToString());
-		
-		// Modification of player movement depending on the input
-		if (right || direction == TouchScreenButton.Direction.Droite)
-		{
-			EmitSignal(nameof(Flip), true);
-			_velocity.x += PLAYER_SPEED;
-		}
-		if (left || direction == TouchScreenButton.Direction.Gauche)
-		{
-			EmitSignal(nameof(Flip), false);
-			_velocity.x -= PLAYER_SPEED;
-		}
-		
-		// Addition of gravity
-		_velocity.y += delta * GRAVITY;
-
-		// Move the player
-		_velocity = MoveAndSlide(_velocity, new Vector2(0, -1));
-
-		// Button for activation/desactivation of hanging
-		if(hanging){
-			this.HangStat = !this.HangStat;
-		}
-
-		// Moddification of animations
-		if(this.IsHit)
-		{
-			EmitSignal(nameof(Anim), Animations.HeadAnimations.HitAnimation.ToString());
-			SetTentaculePosWhenFlip("idle");
-		}
-		else
-		{
-			if (_velocity.x > 0 || _velocity.x < 0)
-			{
-				EmitSignal(nameof(Anim), Animations.HeadAnimations.RunAnimation.ToString());
-				SetTentaculePosWhenFlip("run");
-			}
-			else
-			{
-				EmitSignal(nameof(Anim), Animations.HeadAnimations.IdleAnimation.ToString());
-				SetTentaculePosWhenFlip("idle");
-			}
-		}
-		
-		if (this.Jumping && IsOnFloor())
-		{
-			this.Jumping = false;
-		}
-	}
-
-	public void Jump(){
-		if(!this.Jumping)
-		{
-			this.Jumping = true;
-			var tentaculeArrayLenght = this.TentaculeArray.Count;
-
-			for(int i = 0; i <= tentaculeArrayLenght - 1; i++)
-			{
-				animationController = new AnimationController();
-				AddChild(animationController);
-				animationController.Play(Animations.PlayerAnimations.JumpAnimation.ToString(), this.TentaculeArray[i]);
-			}
-				var factor = this.TentaculeArray[0].PixBlockArray.Count;
-				_velocity.y -= JUMP_SPEED * factor;
-		}
-	}
-
-	public void SetTentaculePosWhenFlip(string anim){
-		for(int i = 0; i <= this.TentaculeArray.Count - 1; i++)
-		{
-			var tentacule = this.TentaculeArray[i];
-			Vector2 tentPos = tentacule.Position;
-			Vector2 pos = this.Position;
-			if(anim == "run")
-			{
-				if(direction == TouchScreenButton.Direction.Gauche)
-				{
-					if(tentacule.IsPositionRight)
-					{
-						tentacule.Position = new Vector2(50, 50);
-					}
-					else if(!tentacule.IsPositionRight)
-					{
-						tentacule.Position = new Vector2(-100, 50);
-					}
-				}
-				else if(direction == TouchScreenButton.Direction.Droite)
-				{
-					if(tentacule.IsPositionRight)
-					{
-						tentacule.Position = new Vector2(100, 50);
-					}
-					else if(!tentacule.IsPositionRight)
-					{
-						tentacule.Position = new Vector2(-50, 50);
-					}
-				}
-			}
-			else if(anim == "idle")
-			{
-				if(tentacule.IsPositionRight)
-				{
-					tentacule.Position = new Vector2(100, 50);
-				}
-				else if(!tentacule.IsPositionRight)
-				{
-					tentacule.Position = new Vector2(-100, 50);
-				}
-			}
-		}
-	}
-	
-	public void AddNewTentacule(bool tentaculePosition)
-	{
-		var tentacule = new Tentacule(tentaculePosition);
-
-		this.AddChild(tentacule);
-		this.TentaculeArray.Add(tentacule);
-
-		Vector2 pos = this.Position;
-		
-		if(tentaculePosition)
-		{
-			tentacule.Position = new Vector2(100, 50);
-			// tentacule.Position = new Vector2(pos.x-800, pos.y-725);
-		}
-		else if(!tentaculePosition)
-		{
-			tentacule.Position = new Vector2(-100, 50);
-		}
-		else
-		{
-			GD.Print("Error => Argument 1 invalid => Please use Right or Left");
-		}
-		
-		tentacule.AddNewPixBlock();
 	}
 }
