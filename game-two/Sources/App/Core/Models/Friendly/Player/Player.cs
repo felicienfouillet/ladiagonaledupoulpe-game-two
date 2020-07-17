@@ -271,7 +271,7 @@ public class Player : KinematicBody2D
 				Vector2 PixblockPos = this.TentaculeArray[i].PixBlockArray[this.TentaculeArray[i].PixBlockArray.Count-1].Position;
 				Vector2 globalTentPos = ((view_size/2) + this.TentaculeArray[i].Position) - offSet;
 
-				if(!((finalPos.x >= 150 && finalPos.x <= 350) && (finalPos.y >= 775 && finalPos.y <= 975) || (finalPos.x >= 1600 && finalPos.x <= 1800) && (finalPos.y >= 750 && finalPos.y <= 950)) && !this.HangingStatus)
+				if(!((finalPos.x >= 150 && finalPos.x <= 350) && (finalPos.y >= 775 && finalPos.y <= 975)) && !this.HangingStatus)
 				{
 					if(finalPos.x > POULPE_POS + 40){			
 						if(this.TentaculeArray[i].IsPositionRight)	
