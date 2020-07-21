@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="game-two"
-run/main_scene="res://Sources/App/Game-Scenes/000-test/test.tscn"
+run/main_scene="res://Sources/App/Game-Scenes/Networking/Networking.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -49,5 +49,5 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
-environment/default_clear_color=Color( 1, 1, 1, 1 )
+environment/default_clear_color=Color( 0.584314, 0.584314, 0.584314, 1 )
 environment/default_environment="res://default_env.tres"
