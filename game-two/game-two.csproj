@@ -41,6 +41,9 @@
     <Compile Include="Sources\App\Shared\Scenes\Controls\Buttons\HealthBar.cs" />
     <Compile Include="Sources\App\Shared\Scenes\Controls\Buttons\UI.cs" />
     <Compile Include="Sources\App\Shared\Scenes\Controls\JoyStick\TouchScreenButton.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\Menu\DeathMenu.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\Menu\EndSceneMenu.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\Menu\MainMenu.cs" />
     <Compile Include="Sources\App\Shared\Tools\ExtensionMethods\ChangePosition\ChangePosition.cs" />
     <Compile Include="Sources\App\Shared\Tools\ExtensionMethods\ToGodot\StringExtensions.cs" />
   </ItemGroup>

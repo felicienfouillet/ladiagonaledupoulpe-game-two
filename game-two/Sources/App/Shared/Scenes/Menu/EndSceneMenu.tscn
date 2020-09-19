@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sources/App/Shared/Scenes/Menu/EndSceneMenu.cs" type="Script" id=1]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="RestartButton" type="Button" parent="."]
+margin_left = 710.0
+margin_top = 300.0
+margin_right = 1210.0
+margin_bottom = 350.0
+text = "Restart Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuButton" type="Button" parent="."]
+margin_left = 710.0
+margin_top = 400.0
+margin_right = 1210.0
+margin_bottom = 450.0
+text = "Main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = -293.481
+margin_top = 100.0
+margin_right = 206.519
+margin_bottom = 128.0
+rect_scale = Vector2( 5, 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "You have won !!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}

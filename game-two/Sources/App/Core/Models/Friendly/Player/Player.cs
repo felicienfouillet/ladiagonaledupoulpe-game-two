@@ -215,7 +215,7 @@ public class Player : KinematicBody2D
 		}
 		if(((Head) this.GetNode(HEAD)).Animation.Contains(Animations.HeadAnimations.DeathAnimation.ToString()))
 		{
-			GetTree().ReloadCurrentScene();
+			GetTree().ChangeScene("res://Sources/App/Shared/Scenes/Menu/DeathMenu.tscn");
 		}
 	}
 
@@ -223,7 +223,7 @@ public class Player : KinematicBody2D
 	{
 		if(((EndPortal) this.GetNode(PORTAL_NODE_PATH + PORTAL)).Animation.Contains(Animations.PortalAnimations.PortalEndAnimation.ToString()))
 		{
-			GetTree().ReloadCurrentScene();
+			GetTree().ChangeScene("res://Sources/App/Shared/Scenes/Menu/EndSceneMenu.tscn");
 		}
 	}
 

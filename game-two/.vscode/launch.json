@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "C:/Users/felic/Documents/CESI/Stage/Stage/Godot_v3.2.1-stable_mono_win64/Godot_v3.1.1-stable_mono_win64.exe",
+            "program": "C:/Users/felic/Documents/Perso/LDDP/Godot/Godot_v3.2.3-stable_mono_win64/Godot_v3.2.3-stable_mono_win64.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
