@@ -381,7 +381,10 @@ __meta__ = {
 scale = Vector2( 5, 5 )
 frames = SubResource( 23 )
 animation = "PortalIdleAnimation"
+<<<<<<< HEAD
 frame = 7
+=======
+>>>>>>> c647cc54e583e884e965c07f95abb773381b47b8
 playing = true
 script = ExtResource( 18 )
 
