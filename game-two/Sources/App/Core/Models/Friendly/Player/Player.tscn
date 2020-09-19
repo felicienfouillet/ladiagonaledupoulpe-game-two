@@ -7,8 +7,6 @@
 [ext_resource path="res://Sources/App/Shared/Assets/Characters/Player/hit_white.png" type="Texture" id=8]
 [ext_resource path="res://Sources/App/Shared/Assets/Characters/Player/death.png" type="Texture" id=9]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 80 )
 
@@ -199,7 +197,7 @@ shape = SubResource( 1 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 32 )
 animation = "IdleAnimation"
-frame = 1
+frame = 2
 playing = true
 script = ExtResource( 2 )
 

@@ -198,7 +198,7 @@ scale = Vector2( 4, 2 )
 texture = ExtResource( 11 )
 
 [node name="sun" type="Sprite" parent="Backgrounds"]
-position = Vector2( 1006.55, -355.651 )
+position = Vector2( 1006.55, -350.611 )
 texture = ExtResource( 8 )
 
 [node name="Planets" type="Node2D" parent="Backgrounds"]
@@ -329,6 +329,9 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 flip_h = true
 
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 384.119, 352.107 )
+
 [node name="AllowedHanging" type="TileMap" parent="."]
 visible = false
 position = Vector2( 0, 249 )
@@ -381,14 +384,11 @@ __meta__ = {
 scale = Vector2( 5, 5 )
 frames = SubResource( 23 )
 animation = "PortalIdleAnimation"
-frame = 6
+frame = 4
 playing = true
 script = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
 position = Vector2( -2, 20 )
 shape = SubResource( 24 )
-
-[node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 384.119, 352.107 )
 [connection signal="animation_finished" from="End/Portal" to="Player" method="_on_Portal_animation_finished"]
