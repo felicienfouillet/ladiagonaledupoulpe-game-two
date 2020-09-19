@@ -1,68 +1,318 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3065B5B8-C47A-4F8E-9350-36C67567F94A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>gametwo</RootNamespace>
     <AssemblyName>game-two</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <GodotProjectGeneratorVersion>1.0.7374.16792</GodotProjectGeneratorVersion>
-    <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)</IntermediateOutputPath>
-    <ApiConfiguration Condition=" '$(Configuration)' != 'ExportRelease' ">Debug</ApiConfiguration>
-    <ApiConfiguration Condition=" '$(Configuration)' == 'ExportRelease' ">Release</ApiConfiguration>
-    <ApiConfiguration Condition=" '$(Configuration)' != 'Release' ">Debug</ApiConfiguration>
-    <ApiConfiguration Condition=" '$(Configuration)' == 'Release' ">Release</ApiConfiguration>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ExportDebug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(GodotDefineConstants);GODOT;DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ExportRelease|AnyCPU' ">
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>$(GodotDefineConstants);GODOT;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(GodotDefineConstants);GODOT;DEBUG;TOOLS;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <TargetFramework>net472</TargetFramework>
+    <!--The following properties were overriden during migration to prevent errors.
+    Enabling them may require other manual changes to the project and its files.-->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GodotSharp">
-      <Private>False</Private>
-      <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Debug' ">
-      <Private>False</Private>
-      <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharpEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Tools' " />
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <Compile Include="Sources\App\Core\Models\Enemies\Monstre\Monstre.cs" />
+    <Compile Include="Sources\App\Core\Models\Friendly\Player\Head.cs" />
+    <Compile Include="Sources\App\Core\Models\Friendly\Player\PixBlock.cs" />
+    <Compile Include="Sources\App\Core\Models\Friendly\Player\PixblockSprite.cs" />
+    <Compile Include="Sources\App\Core\Models\Friendly\Player\Player.cs" />
+    <Compile Include="Sources\App\Core\Models\Friendly\Player\Tentacule.cs" />
+    <Compile Include="Sources\App\Game-Scenes\000-test\EndPortal.cs" />
+    <Compile Include="Sources\App\Game-Scenes\000-test\Poulpix.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\AnimationController\AnimationController.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\AnimationController\Animations.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\AnimationController\Animations\HangingAnimation.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\Controls\Buttons\UI.cs" />
+    <Compile Include="Sources\App\Shared\Scenes\Controls\JoyStick\TouchScreenButton.cs" />
+    <Compile Include="Sources\App\Shared\Tools\ExtensionMethods\ChangePosition\ChangePosition.cs" />
+    <Compile Include="Sources\App\Shared\Tools\ExtensionMethods\ToGodot\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies">
-      <Version>1.0.0</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\1_game_background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\1_2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\2_2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\2_game_background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\3_v2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\4_2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\3_game_background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\4_game_background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_TXT\Saiyan-Sans.ttf" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\7.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Background1\background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\blue_font.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Cartoon_Forest_BG_04.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\BG_Decor.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Foreground.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Ground.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Middle_Decor.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Sky.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\7.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\7.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\7.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\6.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\7.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\background.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_TXT\LICENSES.txt" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_TXT\Llewie.ttf" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_TXT\readme.txt" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\grad_font.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\game_background_1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\cloud.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\comet.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\planet1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\planet2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\planet3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\space.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\game_background_2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\layers\planet.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\layers\space.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\layers\sun.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\game_background_3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\layers\cloud.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\layers\planet.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\layers\space.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\game_background_4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\cloud.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\planet1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\planet2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\space.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\plateforme1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\plateforme2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\purple_font.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\bite-attack.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\death.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\idle.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-1.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-2.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-3.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-4.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-5.png" />
+    <Content Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-6.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Enemies\bite-attack.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Enemies\death.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Enemies\hurt.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Enemies\idle.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Enemies\jump-cycle.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Player\death.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Player\hit_white.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Player\idle_white.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Player\pixblock_white.png" />
+    <Content Include="Sources\App\Shared\Assets\Characters\Player\run_white.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\Joystick\icons8-jump-100.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\Joystick\JoystickSplitted.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\Joystick\LargeHandleFilled.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\Joystick\LargeHandleFilledGrey.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\Joystick\SmallHandleFilledGrey.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\Portal\Purple Portal Sprite Sheet.png" />
+    <Content Include="Sources\App\Shared\Assets\Others\tileset.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="Sources\App\Core\Models\Enemies\Monstre\Monstre.tscn" />
+    <None Include="Sources\App\Core\Models\Friendly\Player\PixBlock.tscn" />
+    <None Include="Sources\App\Core\Models\Friendly\Player\Player.tscn" />
+    <None Include="Sources\App\Core\Models\Friendly\Player\Tentacule.tscn" />
+    <None Include="Sources\App\Game-Scenes\000-test\test.tscn" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\1_game_background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\1\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\1_2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\2_2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\2_game_background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\3_v2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\4_2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\2\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\3_game_background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\3\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\4_game_background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\2d-planet-game-backgrounds\_PNG\4\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\7.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Background1\background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\blue_font.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Cartoon_Forest_BG_04.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\BG_Decor.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Foreground.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Ground.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Middle_Decor.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Cartoon_Forest_BG_04\Layers\Sky.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_AI\1_game_background.ai" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_AI\2_game_background.ai" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_AI\3_game_background.ai" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_AI\4_game_background.ai" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_EPS\1_game_background.eps" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_EPS\2_game_background.eps" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_EPS\3_game_background.eps" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_EPS\4_game_background.eps" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\7.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\1\background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\7.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\2\background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\7.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\3\background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\7.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\free-fairy-tale-game-backgrounds\_PNG\4\background.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\grad_font.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\game_background_1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\cloud.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\comet.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\planet1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\planet2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\planet3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_1\layers\space.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\game_background_2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\layers\planet.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\layers\space.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_2\layers\sun.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\game_background_3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\layers\cloud.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\layers\planet.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_3\layers\space.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\game_background_4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\cloud.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\planet1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\planet2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\parallax-space-backgrounds\PNG\game_background_4\layers\space.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\plateforme1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\plateforme2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\purple_font.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\bite-attack.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\death.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\idle.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-1.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-2.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-3.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-4.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-5.png.import" />
+    <None Include="Sources\App\Shared\Assets\Backgrounds\Tree\tree-6.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Enemies\bite-attack.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Enemies\death.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Enemies\hurt.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Enemies\idle.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Enemies\jump-cycle.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Player\death.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Player\hit_white.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Player\idle_white.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Player\pixblock_white.png.import" />
+    <None Include="Sources\App\Shared\Assets\Characters\Player\run_white.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\Joystick\icons8-jump-100.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\Joystick\JoystickSplitted.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\Joystick\LargeHandleFilled.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\Joystick\LargeHandleFilledGrey.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\Joystick\SmallHandleFilledGrey.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\Portal\Purple Portal Sprite Sheet.png.import" />
+    <None Include="Sources\App\Shared\Assets\Others\tileset.png.import" />
+    <None Include="Sources\App\Shared\Scenes\backgrounds\Space1.tscn" />
+    <None Include="Sources\App\Shared\Scenes\backgrounds\Space2.tscn" />
+    <None Include="Sources\App\Shared\Scenes\Controls\Controls.tscn" />
+    <None Include="Sources\App\Shared\Scenes\Controls\JoyStick\joystick.tscn" />
+  </ItemGroup>
 </Project>

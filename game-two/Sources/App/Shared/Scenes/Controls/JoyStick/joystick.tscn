@@ -4,6 +4,7 @@
 [ext_resource path="res://Sources/App/Shared/Scenes/Controls/JoyStick/TouchScreenButton.cs" type="Script" id=2]
 [ext_resource path="res://Sources/App/Shared/Assets/Others/Joystick/SmallHandleFilledGrey.png" type="Texture" id=3]
 
+
 [sub_resource type="CircleShape2D" id=1]
 radius = 50.0
 
