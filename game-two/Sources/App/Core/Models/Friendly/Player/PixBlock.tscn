@@ -42,7 +42,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "PixBlockAnimation"
-frame = 2
 playing = true
 script = ExtResource( 3 )
 
